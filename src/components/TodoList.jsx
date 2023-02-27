@@ -25,9 +25,6 @@ const TodoList = ({ todos, setTodos, updateData }) => {
       await updateDoc(t, { completed: status })
 
    }
-
-
-
    return (
       <div>
          {todos && todos.map((todo) => (
@@ -42,7 +39,9 @@ const TodoList = ({ todos, setTodos, updateData }) => {
 
                   <Typography variant='h5' component="h2"
 
+
                   >
+
                      {todo.title}
                      {todo.text}
 
