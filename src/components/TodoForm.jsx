@@ -23,7 +23,7 @@ const TodoForm = () => {
    // }
 
    const paperStyle = {
-      padding: '30px 20px', width: 400, margin: '20px auto',
+      padding: '30px 20px', width: 500, margin: '20px auto',
 
    }
 
@@ -37,7 +37,7 @@ const TodoForm = () => {
          title: input,
          completed: false,
       });
-      setInput('')
+      setInput("");
    }
 
    useEffect(() => {
@@ -72,7 +72,7 @@ const TodoForm = () => {
                      <Box>
                         <TextField className='tex'
                            style={{
-                              marginTop: 15, marginRight: 10, width: 278,
+                              marginTop: 15, marginRight: 10, width: 378,
                               fontSize: 20,
                            }}
                            label="Enter Tesks"
@@ -80,7 +80,7 @@ const TodoForm = () => {
                               shrink: true,
                            }}
                            variant="standard"
-                           value={todo.text}
+                           value={todo.title}
                            onChange={inputChange}
 
 
@@ -93,7 +93,7 @@ const TodoForm = () => {
 
                   </FormControl>
                </form>
-               <Box sx={{ marginRight: 20, width: 330 }} ><TodoList todos={todo}
+               <Box sx={{ marginRight: 20, width: 470, textAlign: 'center' }} ><TodoList todos={todo}
                   setTodos={setTodo}
                   updateData={updateData}
                /></Box>

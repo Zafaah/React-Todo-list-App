@@ -42,13 +42,12 @@ const TodoList = ({ todos, setTodos, updateData }) => {
 
                   >
 
-                     {todo.title}
-                     {todo.text}
+
 
 
 
                      <Checkbox onChange={() => handleCheck(todo.id, !todo.completed)}
-                        checked={todo.completed} style={{ color: 'green', float: 'left' }} />
+                        checked={todo.completed} style={{ color: 'green', float: 'left', marginBottom: 20 }} />
 
                      <IconButton onClick={() => deleteTodo(todo.id)} style={{ float: 'right' }}>
                         <Delete style={{ color: "red", }} />
@@ -56,6 +55,8 @@ const TodoList = ({ todos, setTodos, updateData }) => {
                      <IconButton onClick={() => updateData(todo.id)} style={{ float: 'right' }}>
                         <Edit style={{ color: "red" }} />
                      </IconButton>
+                     {todo.title}
+                     {todo.text}
                   </Typography>
 
                </CardContent>
