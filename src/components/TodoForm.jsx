@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidV4 } from 'uuid'
-import { Box, Button, Card, Container, FormControl, Grid, Paper, TextField } from '@mui/material';
+import { Box, Button, Card, Container, FormControl, Grid, outlinedInputClasses, Paper, TextField } from '@mui/material';
 import { Grade, Title } from '@mui/icons-material';
 import TodoList from './TodoList';
 import { blue } from '@mui/material/colors';
@@ -14,6 +14,7 @@ const TodoForm = () => {
 
    const inputChange = (e) => {
       setInput(e.target.value)
+      console.log(input)
    }
 
    // const handleSubmit = (event) => {
@@ -37,7 +38,7 @@ const TodoForm = () => {
          title: input,
          completed: false,
       });
-      setInput("");
+      setInput();
    }
 
    useEffect(() => {
@@ -80,7 +81,8 @@ const TodoForm = () => {
                               shrink: true,
                            }}
                            variant="standard"
-                           value={todo.title}
+                           value={input}
+
                            onChange={inputChange}
 
 
