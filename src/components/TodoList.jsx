@@ -44,7 +44,7 @@ const TodoList = ({ todos, setTodos, updateData }) => {
                         <Delete style={{ color: "red", }} />
                      </IconButton>
                      <IconButton onClick={() => updateData(todo.id)} style={{ float: 'right' }}>
-                        <Edit style={{ color: "red" }} />
+                        <Edit style={{ color: "green" }} />
                      </IconButton>
                      {todo.title}
                      {todo.text}
