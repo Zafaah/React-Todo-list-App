@@ -31,21 +31,12 @@ const TodoList = ({ todos, setTodos, updateData }) => {
             <Card variant='outlined'
                style={{ marginTop: 20, widows: 400 }}
                key={todo.id}
-
                onChange={(event) => event.preventDefault()}
 
             >
                <CardContent>
 
-                  <Typography variant='h5' component="h2"
-
-
-                  >
-
-
-
-
-
+                  <Typography variant='h5' component="h2">
                      <Checkbox onChange={() => handleCheck(todo.id, !todo.completed)}
                         checked={todo.completed} style={{ color: 'green', float: 'left', marginBottom: 20 }} />
 

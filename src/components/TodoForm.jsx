@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { v4 as uuidV4 } from 'uuid'
 import { Box, Button, Card, Container, FormControl, Grid, outlinedInputClasses, Paper, TextField } from '@mui/material';
-import { Grade, Title } from '@mui/icons-material';
+import { Grade, TimeToLeave, Title } from '@mui/icons-material';
 import TodoList from './TodoList';
 import { blue } from '@mui/material/colors';
 import AddIcon from '@mui/icons-material/Add';
 import '../index.css'
-import { addDoc, collection, deleteDoc, doc, onSnapshot, query, QuerySnapshot, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentSnapshot, getDoc, onSnapshot, query, QuerySnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 const TodoForm = () => {
-   const [input, setInput] = useState('');
+   const [Input, setInput] = useState('');
    const [todo, setTodo] = useState([]);
+   const [edit, setEdit] = useState(false)
+   const [id, setId] = useState('')
 
    const inputChange = (e) => {
       setInput(e.target.value)
-      console.log(input)
+
    }
 
-   // const handleSubmit = (event) => {
-   //    event.preventDefault()
-   //    setTodo([...todo, { id: uuidV4(), title: input, completed: false }])
-   //    setInput("")
-   // }
+
 
    const paperStyle = {
       padding: '30px 20px', width: 500, margin: '20px auto',
@@ -30,15 +28,32 @@ const TodoForm = () => {
 
    const create_input = async (e) => {
       e.preventDefault(e);
-      if (input === "") {
+      if (Input === "") {
          alert('please enter valid todo');
+         return;
+      };
+      if (edit) {
+         const t = doc(db, 'todo', id);
+         await updateDoc(t, { title: Input });
+         setEdit(false);
+         setInput('')
          return;
       }
       await addDoc(collection(db, 'todo'), {
-         title: input,
+         title: Input,
          completed: false,
       });
-      setInput();
+      setInput("");
+
+
+   }
+   const updateData = async (id) => {
+      const t = doc(db, 'todo', id);
+      const document = await getDoc(t);
+      const item = document.data();
+      setId(id);
+      setEdit(true)
+      setInput(item.title);
    }
 
    useEffect(() => {
@@ -52,14 +67,6 @@ const TodoForm = () => {
       });
       return () => unsubscribe();
    }, []);
-
-   const updateData = async (todo) => {
-      const t = doc(db, 'todo', todo);
-      await updateDoc(t, { title: input })
-   }
-
-
-
 
 
 
@@ -81,8 +88,7 @@ const TodoForm = () => {
                               shrink: true,
                            }}
                            variant="standard"
-                           value={input}
-
+                           value={Input}
                            onChange={inputChange}
 
 
